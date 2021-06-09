@@ -73,3 +73,31 @@ minimo :: Ord a =>[a] -> a
 minimo [n,i] = min n i
 minimo [n] = n
 minimo (h:h2:t) = min (min h h2) (minimo t)
+
+mcd :: Integral a => a -> a -> a
+mcd a 0 = abs a
+mcd a b = mcd b (a `mod` b)
+
+esPrimo :: Integral a => a -> Bool 
+esPrimo 1 = False 
+esPrimo n = esPrimoInterna n (round (sqrt (fromIntegral n))) 
+ where
+     esPrimoInterna :: Integral a => a -> a -> Bool 
+     esPrimoInterna n 1 = True 
+     esPrimoInterna n i = mod n i /= 0 && esPrimoInterna n (i-1)
+
+nEsimoPrimo :: Integral a => a -> a 
+nEsimoPrimo n = nEsimoPrimoAux n 1 1
+    where
+        nEsimoPrimoAux n i k | a && i == n = k
+                             | a = nEsimoPrimoAux n (i+1) (k+1)
+                             | otherwise = nEsimoPrimoAux n i (k+1)
+            where 
+                a = esPrimo k
+
+generarPrimosHasta :: Integral a => a -> [a]
+generarPrimosHasta n = generarPrimosAux n 1
+    where
+      generarPrimosAux n i | n < i = []
+        | esPrimo i = i: generarPrimosAux n (i+1)
+        | otherwise = generarPrimosAux n (i+1) 

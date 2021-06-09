@@ -1,4 +1,4 @@
-import Utilidades
+import Utilidades ( interseccion, maximo )
 --EJERCICIO 1
 --numero base a la cual convertir
 digitos :: Integral a => a -> a -> [a]
