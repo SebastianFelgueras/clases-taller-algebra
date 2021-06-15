@@ -101,3 +101,8 @@ generarPrimosHasta n = generarPrimosAux n 1
       generarPrimosAux n i | n < i = []
         | esPrimo i = i: generarPrimosAux n (i+1)
         | otherwise = generarPrimosAux n (i+1) 
+
+coprimizar :: Integral a => a -> a -> (a,a)
+coprimizar a b = (a `div` k, b `div` k)
+    where 
+        k = mcd a b
